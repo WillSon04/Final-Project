@@ -1,0 +1,23 @@
+{
+  "name": "qr-order-backend",
+  "version": "1.0.0",
+  "description": "QR Code Restaurant Ordering System Backend",
+  "main": "src/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^4.19.2",
+    "mysql2": "^3.17.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
