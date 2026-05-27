@@ -1,0 +1,13 @@
+.admin-admin-back {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #2d6a4f;
+  text-decoration: none;
+}
+
+.admin-admin-back:hover {
+  text-decoration: underline;
+}

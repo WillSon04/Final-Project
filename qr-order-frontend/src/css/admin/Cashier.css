@@ -1,0 +1,293 @@
+/* Cashier.vue — dashboard 10 bàn, bill gộp */
+.cashier-admin.admin-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(1rem, 3vw, 1.75rem);
+  position: relative;
+}
+
+.cashier-header {
+  margin-bottom: 1.25rem;
+}
+
+.cashier-header h1 {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.35rem, 2.5vw, 1.65rem);
+}
+
+.cashier-sub {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #444;
+  max-width: 44rem;
+  line-height: 1.45;
+}
+
+.cashier-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+
+@media (min-width: 720px) {
+  .cashier-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.cashier-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  padding: 1rem 0.85rem;
+  min-height: 96px;
+  border-radius: 12px;
+  border: 2px solid #ddd;
+  background: #fafafa;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.12s;
+}
+
+.cashier-tile:hover {
+  border-color: #999;
+  transform: translateY(-1px);
+}
+
+.cashier-tile--empty {
+  color: #777;
+}
+
+.cashier-tile--bill {
+  border-color: #2d6a4f;
+  background: #f4faf6;
+}
+
+.cashier-tile--request {
+  border-color: #c41e3a;
+  background: #fff5f6;
+  animation: cashier-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes cashier-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(196, 30, 58, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(196, 30, 58, 0);
+  }
+}
+
+.cashier-tile__label {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.cashier-tile__amount {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #2d6a4f;
+}
+
+.cashier-tile__empty {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.cashier-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.45rem;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.cashier-badge--request {
+  background: #c41e3a;
+  color: #fff;
+}
+
+.cashier-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 40;
+}
+
+.cashier-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 50;
+  width: min(100%, 420px);
+  height: 100%;
+  background: #fff;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+  overflow-y: auto;
+  padding: 1rem 1.15rem 2rem;
+}
+
+.cashier-drawer__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.cashier-drawer__head h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.3;
+}
+
+.cashier-drawer__close {
+  flex-shrink: 0;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.cashier-drawer__loading {
+  color: #666;
+  padding: 1rem 0;
+}
+
+.cashier-alert {
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  margin: 0 0 0.75rem;
+}
+
+.cashier-alert--request {
+  background: #fff0f2;
+  border: 1px solid #f0c4cb;
+  color: #8b1530;
+}
+
+.cashier-alert--warn {
+  background: #fff8e6;
+  border: 1px solid #ecd9a8;
+  color: #6b5200;
+}
+
+.cashier-muted {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.cashier-meta {
+  font-size: 0.85rem;
+  color: #555;
+  margin: 0 0 1rem;
+}
+
+.cashier-section h3 {
+  margin: 0 0 0.65rem;
+  font-size: 0.95rem;
+}
+
+.cashier-item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cashier-item-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.cashier-item-row__main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.cashier-item-row__name {
+  font-weight: 600;
+}
+
+.cashier-item-row__qty {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.cashier-item-row__prices {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 0.85rem;
+}
+
+.cashier-totals {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 2px solid #333;
+}
+
+.cashier-total-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.35rem 0;
+  font-size: 0.95rem;
+}
+
+.cashier-total-row--grand {
+  font-size: 1.1rem;
+  margin-top: 0.35rem;
+}
+
+.cashier-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.cashier-btn {
+  padding: 0.65rem 1rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.cashier-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cashier-btn--primary {
+  background: #2d6a4f;
+  color: #fff;
+}
+
+.cashier-btn--outline {
+  background: #fff;
+  color: #2d6a4f;
+  border: 2px solid #2d6a4f;
+}
+
+.cashier-drawer-enter-active,
+.cashier-drawer-leave-active {
+  transition: transform 0.2s ease;
+}
+
+.cashier-drawer-enter-from,
+.cashier-drawer-leave-to {
+  transform: translateX(100%);
+}

@@ -1,0 +1,105 @@
+.admin-hub {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: clamp(1.25rem, 4vw, 2rem);
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f5f2ed 0%, #ebe6de 100%);
+}
+
+.admin-hub__head {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.admin-hub__eyebrow {
+  margin: 0 0 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #b4232c;
+}
+
+.admin-hub__head h1 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.5rem, 4vw, 1.85rem);
+}
+
+.admin-hub__sub {
+  margin: 0;
+  font-size: 0.92rem;
+  color: #555;
+  line-height: 1.45;
+}
+
+.admin-hub__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.admin-hub__card {
+  display: block;
+  padding: 1.15rem 1.2rem;
+  border-radius: 14px;
+  border: 1px solid #ddd6cc;
+  background: #fff;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.admin-hub__card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.admin-hub__card h2 {
+  margin: 0.35rem 0 0.35rem;
+  font-size: 1.15rem;
+}
+
+.admin-hub__card p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #555;
+  line-height: 1.4;
+}
+
+.admin-hub__icon {
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.admin-hub__card--kitchen {
+  border-left: 4px solid #c45c26;
+}
+
+.admin-hub__card--cashier {
+  border-left: 4px solid #2d6a4f;
+}
+
+.admin-hub__card--ratings {
+  border-left: 4px solid #b8860b;
+}
+
+.admin-hub__foot {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.admin-hub__guest-link {
+  font-size: 0.88rem;
+  color: #666;
+}
+
+@media (min-width: 560px) {
+  .admin-hub__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .admin-hub__card--ratings {
+    grid-column: 1 / -1;
+  }
+}

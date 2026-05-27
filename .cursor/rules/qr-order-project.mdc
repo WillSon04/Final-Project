@@ -1,0 +1,74 @@
+---
+description: QR đặt món nhà hàng — stack, luồng nghiệp vụ, file quan trọng, quy ước code
+alwaysApply: true
+---
+
+# Final-Project — QR Ordering (Lẩu Manwah)
+
+## Stack & chạy local
+
+- **Backend:** `qr-order-backend` — Express + MySQL (`restaurant_qr`), cổng **3000**, `npm run dev`
+- **Frontend:** `qr-order-frontend` — Vue 3 + Vite, cổng **5173**, `host: true` cho demo điện thoại
+- **DB:** `database_schema.sql` → `menu_seed.sql`; DB cũ thêm `migrations/*.sql`
+- **Env (không commit):** `qr-order-backend/.env` (MySQL). Frontend dev **không cần** đổi IP — proxy Vite `/api` → `127.0.0.1:3000`; QR dùng `window.location.origin` (`publicOrigin.js`).
+- **VAT 8%** — tính trên backend khi thêm/cập nhật món (`orders.routes.js`)
+
+## Vai trò & URL
+
+| Vai trò | Route |
+|---------|--------|
+| Trang chủ + QR 10 bàn | `/` |
+| Khách (bàn = id 1–10) | `/t/:tableCode` |
+| Chi tiết đơn | `/order/:orderId` |
+| Cảm ơn + đánh giá | `/t/:tableCode/cam-on` |
+| Hub nhân viên | `/admin` |
+| Bếp | `/admin/kitchen` |
+| Thu ngân | `/admin/cashier` |
+| Đánh giá | `/admin/ratings` |
+
+## Luồng khách (bắt buộc giữ đúng)
+
+1. Gọi món từ menu → `POST /orders`, thêm item → chuyển `/order/{id}`.
+2. **Gọi thanh toán chỉ từ menu** (dock **Gọi TT**), **không** trên `OrderStatus.vue`.
+3. **Chưa được Gọi TT** nếu bàn còn đơn `RECEIVED`/`PREPARING` (`can_pay` / `ORDERS_STILL_IN_KITCHEN`).
+4. Sau **Gọi TT:** overlay mờ toàn màn, khóa đặt món; nút **Hủy thanh toán** → `DELETE .../payment-request`.
+5. Thu ngân thanh toán bàn (`POST /api/cashier/tables/:id/pay`) → menu/đơn **tự** `replace` sang `/t/{bàn}/cam-on` (poll `GET .../checkout-status`), **không** bước xác nhận thủ công.
+6. Đánh giá xong → `resetTableGuestSession()` → menu sạch cho lượt khách sau (`tableSession.js`).
+
+## Luồng bếp & thu ngân
+
+- **Bếp:** xử lý đơn **cũ nhất trước**; hiện `+N chờ`; không hiện giá; `PREPARING` → khách không thêm món vào đơn đó (đơn mới `RECEIVED` nếu gọi tiếp).
+- **Thu ngân:** bill **gộp** mọi đơn chưa `PAID` của bàn; nhãn **Gọi TT** khi `table_payment_requests` PENDING.
+- Trạng thái đơn: `RECEIVED` → `PREPARING` → `COMPLETED` → `PAID`.
+
+## File then chốt
+
+| Khu vực | File |
+|---------|------|
+| Bill gộp bàn | `qr-order-backend/src/services/tableBill.js` |
+| Gọi TT / đánh giá / checkout | `qr-order-backend/src/routes/tables.routes.js` |
+| Đơn & bếp | `qr-order-backend/src/routes/orders.routes.js` |
+| Thu ngân | `qr-order-backend/src/routes/cashier.routes.js` |
+| Menu khách | `qr-order-frontend/src/pages/TableMenu.vue` |
+| Session giỏ / lượt khách | `qr-order-frontend/src/utils/tableSession.js` |
+| Cảm ơn | `qr-order-frontend/src/pages/ThankYouFeedback.vue` |
+| Hub admin | `qr-order-frontend/src/pages/admin/AdminHub.vue` |
+| Đánh giá admin | `qr-order-frontend/src/pages/admin/AdminRatings.vue` |
+
+## Quy ước khi sửa code
+
+- UI tiếng Việt; thay đổi **tối thiểu**, khớp style hiện có (Vue Options API + một số `<script setup>`).
+- Không commit `.env*`, `node_modules`, `dist/`.
+- Không thêm auth `/admin` trừ khi user yêu cầu.
+- Poll khách ~4s: lịch sử đơn + `payment-request` + `checkout-status` trong `TableMenu.vue`.
+- `markTableVisitActive(tableCode)` khi gọi món / Gọi TT — dùng cho redirect cảm ơn đúng lượt.
+
+## Hướng phát triển (chưa làm)
+
+- Đăng nhập bảo vệ `/admin/*`
+- HTTPS + CORS production
+- Ảnh món trong `public/menu/` + `UPDATE menu_items.image_url`
+
+## Máy mới / clone GitHub
+
+Code sync qua Git; chat Cursor **không** sync. Đọc `README.md`, tạo lại `.env`, chạy schema/seed MySQL, `npm install` cả hai thư mục.

@@ -1,0 +1,14 @@
+USE restaurant_qr;
+
+CREATE TABLE IF NOT EXISTS service_ratings (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  table_id INT UNSIGNED NOT NULL,
+  stars TINYINT UNSIGNED NOT NULL,
+  comment VARCHAR(500) NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY idx_ratings_table (table_id),
+  CONSTRAINT fk_ratings_table
+    FOREIGN KEY (table_id) REFERENCES tables (id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

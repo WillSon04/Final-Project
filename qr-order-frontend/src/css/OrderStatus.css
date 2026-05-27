@@ -1,0 +1,208 @@
+/* OrderStatus.vue */
+.order-detail {
+  min-height: 100vh;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: clamp(1rem, 4vw, 1.5rem) clamp(0.85rem, 4vw, 1.25rem)
+    calc(1.5rem + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(180deg, #faf7f3 0%, var(--color-bg, #f6f3ef) 35%);
+}
+
+.order-detail .eyebrow {
+  margin: 0 0 0.2rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-muted, #5c5c5c);
+}
+
+.order-detail .order-title {
+  margin: 0;
+  font-size: clamp(1.35rem, 4vw, 1.65rem);
+}
+
+.order-detail .table-line {
+  margin: 0.35rem 0 0;
+  font-weight: 600;
+  color: var(--color-accent, #b4232c);
+}
+
+.order-detail .state-block {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: var(--color-muted, #5c5c5c);
+}
+
+.order-detail .state-block.error {
+  color: #a40000;
+}
+
+.order-detail .status-card,
+.order-detail .items-card,
+.order-detail .total-card {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: var(--radius-md, 12px);
+  background: var(--color-surface, #fff);
+  border: 1px solid var(--color-border, #e8e4df);
+  box-shadow: var(--shadow-soft, 0 4px 24px rgba(26, 26, 26, 0.06));
+}
+
+.order-detail .status-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.92rem;
+}
+
+.order-detail .status-row + .status-row {
+  margin-top: 0.65rem;
+}
+
+.order-detail .label {
+  color: var(--color-muted, #5c5c5c);
+}
+
+.order-detail .status-badge {
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: #f3ebe8;
+  color: var(--color-accent, #b4232c);
+}
+
+.order-detail .status-hint {
+  margin: 0.75rem 0 0;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.order-detail .items-summary {
+  margin: 0.75rem 0 0;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--color-border, #e8e4df);
+  font-size: 0.92rem;
+  color: var(--color-muted, #5c5c5c);
+}
+
+.order-detail .items-summary strong {
+  color: var(--color-text, #1a1a1a);
+}
+
+.order-detail .section-title {
+  margin: 0 0 0.65rem;
+  font-size: 1rem;
+}
+
+.order-detail .item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.order-detail .item-row {
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--color-border, #e8e4df);
+}
+
+.order-detail .item-row:last-child {
+  border-bottom: none;
+}
+
+.order-detail .item-main {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.order-detail .item-name {
+  flex: 1;
+  min-width: 0;
+}
+
+.order-detail .item-qty {
+  white-space: nowrap;
+  color: var(--color-muted, #5c5c5c);
+  font-weight: 500;
+}
+
+.order-detail .item-meta {
+  margin-top: 0.2rem;
+  font-size: 0.78rem;
+}
+
+.order-detail .item-total {
+  margin-top: 0.35rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--color-accent, #b4232c);
+}
+
+.order-detail .total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.92rem;
+}
+
+.order-detail .total-row + .total-row {
+  margin-top: 0.45rem;
+}
+
+.order-detail .total-row.grand {
+  margin-top: 0.75rem;
+  padding-top: 0.65rem;
+  border-top: 1px dashed var(--color-border, #e8e4df);
+  font-size: 1rem;
+}
+
+.order-detail .total-row.grand strong {
+  color: var(--color-accent, #b4232c);
+  font-size: 1.05rem;
+}
+
+.order-detail .actions {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.order-detail .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  padding: 0 1rem;
+  border-radius: var(--radius-md, 12px);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.order-detail .btn-secondary {
+  background: #f3f0ec;
+  color: var(--color-text, #1a1a1a);
+  border: 1px solid var(--color-border, #e8e4df);
+}
+
+.order-detail .btn-secondary.disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.order-detail .hint {
+  margin-top: 1rem;
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.order-detail .muted {
+  color: var(--color-muted, #5c5c5c);
+}

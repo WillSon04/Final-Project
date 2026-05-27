@@ -1,0 +1,85 @@
+.ratings-admin.admin-shell {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: clamp(1rem, 3vw, 1.75rem);
+}
+
+.ratings-header {
+  margin-bottom: 1.25rem;
+}
+
+.ratings-header h1 {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.35rem, 2.5vw, 1.65rem);
+}
+
+.ratings-sub,
+.ratings-summary {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.ratings-summary strong {
+  color: #b8860b;
+}
+
+.ratings-muted {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.ratings-error {
+  color: #b4232c;
+  font-size: 0.9rem;
+}
+
+.ratings-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.ratings-card {
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  border: 1px solid #e8e0d4;
+  background: #fff;
+}
+
+.ratings-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+  margin-bottom: 0.35rem;
+}
+
+.ratings-star {
+  color: #ddd;
+  font-size: 1.1rem;
+}
+
+.ratings-star.on {
+  color: #e6a800;
+}
+
+.ratings-meta {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.ratings-comment {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.ratings-comment--empty {
+  margin: 0;
+  font-style: italic;
+}
